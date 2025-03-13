@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Modal, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { taskOperations } from "../../database/database";
+import { habitOperations } from "../../database/habitsDb";
 
-const AddHabitModal = ({ visible, onClose }) => {
+const AddHabitModal = ({ visible, onClose}) => {
   const icons = ["📚", "🛒", "🏋️‍♂️", "🎵", "💻", "✏️"]; // Lista de ícones
+
   const colors = ["red", "blue", "green", "orange", "purple"]; // Lista de cores
 
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [selectedIcon, setSelectedIcon] = useState(icons[0]); // Agora icons já foi definido
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [color, setColor] = useState(colors[0]);
 
   const handleSave = async () => {
-    await taskOperations.createTask(title, subtitle, selectedIcon, selectedColor);
+    await habitOperations.createTask(title, subtitle, selectedIcon, color);
     console.log("Tarefa salva!");
     onClose(); // Fecha o modal ou volta para a tela anterior
   };
@@ -54,14 +55,14 @@ const AddHabitModal = ({ visible, onClose }) => {
               renderItem={({ item }) => (
 
                 <TouchableOpacity
-                  onPress={() => setSelectedColor(item)}
+                  onPress={() => setColor(item)}
                   style={{
                     backgroundColor: item,
                     width: 40,
                     height: 40,
                     margin: 5,
                     borderRadius: 20,
-                    borderWidth: selectedColor === item ? 2 : 0,
+                    borderWidth: color === item ? 2 : 0,
                     borderColor: "black",
                   }}
                 />

@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { habitOperations } from "../../database/habitsDb";
 
-const HabitList = ({ habits }) => {
+const HabitList = () => {
+
+  const [habits,SetHabits] = useState([]);
+
+  useEffect(()=>{
+    habitOperations.getTasks()
+
+    .then(data =>SetHabits(data))
+    .catch(error =>console.error(("erro ao buscar hábitos",error))
+    )
+  }
+)
   return (
     <View style={styles.container}>
 
       <FlatList
         data={habits}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item,index) => item.id.toString()}
         renderItem={({ item }) => (
 
-          <View style={styles.habitItem}>
-            <Icon name={item.icon} size={30} color="white" style={styles.icon} />
+          <View style={[styles.habitItem,{backgroundColor: item.color} ]}>
+            
+            <Text  style={[styles.icon,]}>{item.icon}</Text>
             <View style={styles.textContainer}>
               <Text style={styles.title}>{item.title}</Text>
               {item.subtitle ? <Text style={styles.subtitle}>{item.subtitle}</Text> : null}
@@ -36,16 +48,18 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     marginVertical: 5,
+  
    
     
   },
   icon: {
     marginRight: 10,
-    alignItems:'center'
+    alignItems:'center',
   },
   textContainer: {
     flex: 1,
-    alignItems:'center'
+    alignItems:'center',
+    
    
   },
   title: {

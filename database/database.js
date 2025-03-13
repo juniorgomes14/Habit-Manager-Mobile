@@ -8,21 +8,12 @@ export const initDatabase = async () => {
 
   try {
     if (!dbInstance) {
-      dbInstance = await SQLite.openDatabaseAsync("app.db");
+      dbInstance = await SQLite.openDatabaseAsync("auth.db");
 
       await dbInstance.execAsync(
         "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT)"
       );
 
-      await dbInstance.execAsync(
-        `CREATE TABLE IF NOT EXISTS tasks (
-          id INTEGER PRIMARY KEY AUTOINCREMENT, 
-          title TEXT NOT NULL, 
-          subtitle TEXT, 
-          icon TEXT, 
-          color TEXT
-        )`
-      );
 
       console.log("Database and table created successfully");
     }
@@ -69,30 +60,3 @@ export const userOperations = {
   },
 };
 
-export const taskOperations = {
-  createTask: async (title, subtitle, icon, color) => {
-    const db = await getDatabase();
-    return await db.runAsync(
-      "INSERT INTO tasks (title, subtitle, icon, color) VALUES (?, ?, ?, ?)",
-      [title, subtitle, icon, color]
-    );
-  },
-
-  getTasks: async () => {
-    const db = await getDatabase();
-    return await db.getAllAsync("SELECT * FROM tasks");
-  },
-
-  updateTask: async (id, title, subtitle, icon, color) => {
-    const db = await getDatabase();
-    return await db.runAsync(
-      "UPDATE tasks SET title = ?, subtitle = ?, icon = ?, color = ? WHERE id = ?",
-      [title, subtitle, icon, color, id]
-    );
-  },
-
-  deleteTask: async (id) => {
-    const db = await getDatabase();
-    return await db.runAsync("DELETE FROM tasks WHERE id = ?", [id]);
-  },
-};

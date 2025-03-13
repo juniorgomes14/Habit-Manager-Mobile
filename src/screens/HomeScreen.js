@@ -1,7 +1,7 @@
 import { View, Text, FlatList, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import HabitList from "../components/habit";
-import AddHabitModal from "../components/AddHabitModal"; // Importando o modal
+import AddHabitModal from "../components/AddHabitModal"; 
 
 const HomeScreen = () => {
   const dataT = new Date();
@@ -43,6 +43,7 @@ const HomeScreen = () => {
 
       <View style={styles.lista}>
         <View style={styles.dayCalen}>
+
           <FlatList
             data={daysOfWeek}
             keyExtractor={(item) => item.id}
