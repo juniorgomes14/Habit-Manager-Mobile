@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput,  TouchableOpacity,Image } from 'react-native';
-import { userOperations } from '../../../database/database';
+import { userOperations } from '../../database/database';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -44,7 +44,7 @@ const LoginScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image 
-        source={require('../../../assets/background.png')} 
+        source={require('../../assets/background.png')} 
         style={styles.imageTop}
       />
       <Text style={styles.title}>Login</Text> 

@@ -4,10 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Ionicons } from '@expo/vector-icons';
 
-import LoginScreen from './src/screens/loginScreen/loginScreen';
-import SignUpScreen from './src/screens/signupScreen/signupScreen';
+import LoginScreen from './src/screens/loginScreen';
+import SignUpScreen from './src/screens/signupScreen';
 import HomeScreen from './src/screens/HomeScreen';
-import Meu from './src/screens/meu/meu'
+import Meu from './src/screens/meu'
 import HistoryScreen from './src/screens/history';
 
 

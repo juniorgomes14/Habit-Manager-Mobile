@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 import { StyleSheet,Button, TextInput, View,Text,TouchableOpacity  } from "react-native"
-import { userOperations } from "../../../database/database";
+import { userOperations } from "../../database/database";
 
 const SignUpScreen=({navigation})=>{
   
